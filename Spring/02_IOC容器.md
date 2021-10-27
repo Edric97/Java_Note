@@ -156,5 +156,5 @@ BeanFactory的子接口，提供更多更强大的功能，一般由开发人员
 
 注释：加载配置文件的时候，就会创建配置文件对象
 
-对ApplicationContext接口而言，最重要的两个实现类是：`ClassPathXmlApplicationContext` 和 `FileSystemXmlApplicationContext`
+对ApplicationContext接口而言，最重要的两个实现类是：`ClassPathXmlApplicationContext`——从src下开始的路径 和 `FileSystemXmlApplicationContext`——从盘区（比如C盘、D盘）开始的路径
 
