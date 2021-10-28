@@ -73,5 +73,32 @@ book1 和 book2 的地址相同，也就是说从同一个xml文件中实例化�
 <bean id="book" class="spring5.Book" scope="singleton"></bean>
 ```
 
+## 四、Bean生命周期
 
+所谓生命周期，就是指从对象创建到对象销毁的过程。
+
+### 1、Bean的生命周期
+
+```markdown
+1、通过构造器创建Bean实例（无参构造）
+2、为Bean的属性设置值和其他Bean引用（调用set方法）
+3、调用Bean的初始化方法（需要进行配置该初始化方法——即，在<bean>标签里添加init-method属性）
+4、Bean可以使用了（对象获取到了）
+5、当容器关闭的时候，调用Bean销毁方法（需要配置销毁方法——即，在<bean>标签里添加destroy-method属性）
+```
+
+### 2、Bean的后置处理器
+
+所谓的Bean的后置处理器，实际上就是个类，不过实现了BeanPostProcessor接口。
+
+这样在xml文件配置的时候，Spring就会为这个xml文件下，所有其他类绑定该后置处理器。
+
+具体上来说有两步：
+
+```markdown
+1、把Bean实例传递给Bean后置处理器的方法PostProcessBeforeInitialization —— 这一步在上面的2，3步之间
+2、把Bean实例传递给Bean后置处理器的方法PostProcessAfterInitialization —— 这一步在上面的3，4步之间
+```
+
+因为，Bean的生命周期严格上来说，是有7步的。
 
