@@ -283,3 +283,148 @@ step2:使用util标签完成list集合注入提取
 </bean>
 ```
 
+## 四、一个具体的例子
+
+首先是主要的Bean类：
+
+```java
+package spring5;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class Book {
+    private int[] array;
+    private List<Integer> list;
+    private String name;
+    private String author;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int[] getArray() {
+        return array;
+    }
+
+    public void setArray(int[] array) {
+        this.array = array;
+    }
+
+    public List<Integer> getList() {
+        return list;
+    }
+
+    public void setList(List<Integer> list) {
+        this.list = list;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "array=" + Arrays.toString(array) +
+                ", list=" + list +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", user=" + user +
+                '}';
+    }
+}
+
+```
+
+然后是用到的Bean类：
+
+```java
+package spring5;
+
+public class User {
+    private String name;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void add() {
+        System.out.println("Hello, Spring");
+    }
+}
+
+```
+
+再然后就是xml配置文件（工厂）：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="book" class="spring5.Book">
+        <property name="array">
+            <array>
+                <value>1</value>
+                <value>2</value>
+            </array>
+        </property>
+        <property name="author" value="Henry"></property>
+        <property name="list">
+            <list>
+                <value>1</value>
+                <value>2</value>
+            </list>
+        </property>
+        <property name="name">
+            <value>Henry</value>
+        </property>
+        <property name="user" ref="user"></property>
+    </bean>
+    <bean id="user" class="spring5.User">
+        <property name="name" value="Lucy"></property>
+    </bean>
+
+</beans>
+```
+
+最后是一个测试类，测试Bean加上工厂好不好用，能不能供上层使用：
+
+```java
+package spring5.test;
+
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import spring5.Book;
+
+public class TestBook {
+    @Test
+    public void testBook() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("bean2.xml");
+        Book book = context.getBean("book", Book.class);
+        System.out.println(book);
+    }
+}
+
+```
+
