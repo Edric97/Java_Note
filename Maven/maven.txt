@@ -1,0 +1,48 @@
+关于maven：
+1、是自动构建工具，是一个标准的目录结构
+	目录结构一般形如：
+
+	工程名
+		pom.xml（是整个项目的描述性文件）
+		src
+			main
+				java
+				resources
+			test
+				java
+				resources
+		target
+2、是标准的构建流程，包括了编译、打包、发布等流程。整个流程是lifecycle，具体的某个阶段是phase，最小执行单元是goal。
+3、自动依赖管理工具。将用到的依赖，自动管理好。依赖一般从中央仓库下载，下载的依据一般是GAV，就是group,artifactId,version。
+
+
+
+另外：
+模块管理，一个项目可能会很大，所以可以拆分成多个模块（modules）。每个模块各自使用maven管理。即
+	
+	project
+		module1
+			pom.xml
+			src
+			target
+		module2
+			pom.xmkl
+			src
+			target
+	
+但是具体的每个模块的pom.xml文件会有公共的部分，因此可以单独拉出来，成为一个parent。此时
+
+	project
+		pom.xml
+		parent
+			pom.xml
+		module1
+			pom.xml
+			src
+			target
+		module2
+			pom.xml
+			src
+			target
+
+根目录下的pom.xml用来统一管理，而子模块pom.xml中公共的部分则放在parent下的pom.xml。
