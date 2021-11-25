@@ -1,0 +1,75 @@
+
+set showmatch
+
+set number
+
+set mouse=a
+
+set cindent
+
+set autoindent
+
+set confirm
+
+set tabstop=3
+
+syntax on
+
+set softtabstop=3
+
+set shiftwidth=3
+
+set guifont=Courier_New:h10:cANSI
+
+set enc=utf-8
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+
+set langmenu=zh_CN.UTF-8
+set helplang=cn
+
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+
+set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
+
+
+set laststatus=2
+
+set cmdheight=2
+
+set hlsearch
+set incsearch
+
+
+set gdefault
+
+set matchtime=10
+
+
+set autoread
+
+set clipboard+=unnamed
+map <C-A> ggVGY
+map! <C-A> <Esc>ggVGY
+map <F12> gg=G
+
+"自动补全
+:inoremap ( ()<ESC>i
+:inoremap ) <c-r>=ClosePair(')')<CR>
+:inoremap { {<CR>}<ESC>O
+:inoremap } <c-r>=ClosePair('}')<CR>
+:inoremap [ []<ESC>i
+:inoremap ] <c-r>=ClosePair(']')<CR>
+:inoremap " ""<ESC>i
+:inoremap ' ''<ESC>i
+function! ClosePair(char)
+	if getline('.')[col('.') - 1] == a:char
+		return "\<Right>"
+	 else
+		 return a:char
+	 endif
+endfunction
+filetype plugin indent on
+"打开文件类型检测, 加了这句才可以用智能补全
+set completeopt=longest,menu
+
+:colorscheme desert 
