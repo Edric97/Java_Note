@@ -49,7 +49,7 @@ Tomcat的设计是基于模块化设计的，内部主要依赖于不同的模�
 
 4、当相应的Host获取该请求后，根据请求中的地址，找寻相应的Context来处理该请求
 
-5、Context根据其内部的映射表，获取相应的servlet，并构造`HttpServletRequest`对象和`HttpServletResponse`对象，进行业务处理
+5、Context根据其内部的映射表，获取相应的Wrapper（里面封装着servlet），并构造`HttpServletRequest`对象和`HttpServletResponse`对象，并进行业务处理（ ——》Wrapper调用HttpServlet对象的service方法（service方法就是用来处理http请求的方法，它会根据http的不同请求，比如get请求的话，会调用 this.doGet(req, resp)方法，因此要在web层里面要重写doGet方法），把创建的 HttpRequest 对象和 HttpResponse 对象作为参数传给HttpServlet对象。HttpServlet调用HttpRequest对象的有关方法（一般指的是doGet或者doPost方法），获取Http请求信息。HttpServlet调用HttpResponse对象的有关方法，生成响应数据）。
 
 6、Context将处理完的`HttpServletResponse`对象返回给`Host`
 

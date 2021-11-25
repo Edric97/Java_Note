@@ -163,7 +163,7 @@ HttpServlet类：（有方法的重载）
 2、Servlet容器接收Web Client的请求
 3、Servlet容器创建一个HttpRequest对象，将Web Client请求的信息封装到这个对象中
 4、Servlet容器创建一个HttpResponse对象（参数对象优先生成）
-5、Servlet容器调用HttpServlet对象的service()方法，把上面3、4步创建的 HttpRequest 对象和 HttpResponse 对象作为参数传给HttpS ervlet对象
+5、Servlet容器调用HttpServlet对象的service()方法，把上面3、4步创建的 HttpRequest 对象和 HttpResponse 对象作为参数传给HttpServlet对象
 6、HttpServlet调用HttpRequest对象的有关方法（一般指的是doGet或者doPost方法），获取Http请求信息
 7、HttpServlet调用HttpResponse对象的有关方法，生成响应数据
 8、Servlet容器把HttpServlet的响应结果传递给Web Client
@@ -185,7 +185,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 
 所以这两个方法，都需要在自己的业务逻辑的Servlet类（继承HttpServlet）中重写。
 
-
+###### 
 
 问题1:为什么要继承HttpServlet，而不是GenericServlet呢？
 
