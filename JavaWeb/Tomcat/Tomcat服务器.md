@@ -35,7 +35,7 @@ Tomcat的设计是基于模块化设计的，内部主要依赖于不同的模�
 * Server组件：一个Tomcat只能有一个Server，Server就是一个Tomcat实例
 * Service组件：其实是一个集合，将Connector组件与Container组件包装在一起，对外进行服务
 * Connector（连接器）组件：主要负责`监听`指定端口的 `客户端请求 ` （不同端口对应不同Connect组件，因为发起请求的客户端很多，所以说要有多个Connector组件），将Socket请求过来的数据，都封装成Request请求对象，同时将该请求对象传递给Container容器进行下一步处理。因此其作用就是——将客户端的请求转发到Container容器，这也是为什么被称作连接器的原因。
-* Container组件：该组件是最接近Web应用的组件，它负责根据请求进行一系列的servlet调用。本身又包含四个子容器：`Engine, Host, Context, Wrapper`
+* Container组件：该组件是最接近Web应用的组件，它负责根据请求进行一系列的servlet调用。本身又包含四个子容器：`Engine, Host, Context, Wrapper(每个Wrapper封装着一个servlet)`
 
 
 
